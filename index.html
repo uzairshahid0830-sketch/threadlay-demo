@@ -1,3 +1,11 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Threadlay - Premium Bedding | Pakistan</title>
+</head>
+<body>
 <style>
   :root{
     --bg:#ffffff; --soft:#f8f7f5; --ink:#1a1a1a; --muted:#8d8d8d; --line:#ececec;
@@ -7,6 +15,7 @@
     --wrap:1280px;
   }
   *{box-sizing:border-box}
+  html,body{overflow-x:hidden;max-width:100%}
   body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
   img{max-width:100%;display:block}
   a{color:inherit;text-decoration:none}
@@ -18,7 +27,8 @@
 
   /* top bar */
   .topbar{background:var(--ink);color:#efe9e2;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase}
-  .topbar .wrap{display:flex;justify-content:space-between;align-items:center;padding:8px 26px}
+  .topbar .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:8px 26px}
+  .topbar span{min-width:0}
   .topbar .social{display:flex;gap:16px}
   .topbar .social a{opacity:.8}.topbar .social a:hover{opacity:1;color:var(--coral2)}
   .topbar svg{width:15px;height:15px}
@@ -26,6 +36,7 @@
   /* header */
   header.site{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
   .hd{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;padding:18px 26px;max-width:var(--wrap);margin:0 auto}
+  .hd>*{min-width:0}
   .logo{display:flex;align-items:center;gap:11px}
   .logo .mark{width:34px;height:34px;border-radius:50% 50% 50% 4px;background:linear-gradient(135deg,var(--coral2),var(--coral));transform:rotate(-8deg)}
   .logo .name{font-family:var(--serif);font-size:1.5rem;letter-spacing:.22em;padding-left:.22em}
@@ -38,6 +49,11 @@
   .icons svg{width:21px;height:21px}
   .cartc{position:relative}
   .cartc b{position:absolute;top:-8px;right:-9px;background:var(--coral);color:#fff;border-radius:999px;min-width:16px;height:16px;font-size:.62rem;display:flex;align-items:center;justify-content:center;font-weight:700}
+  .burger{display:none!important;background:none;border:none;color:var(--ink);padding:0}
+  .mobnav{display:none;flex-direction:column;border-top:1px solid var(--line);background:#fff}
+  .mobnav a{padding:15px 26px;font-size:.82rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#2a2a2a;border-bottom:1px solid var(--line)}
+  .mobnav a:active{background:var(--soft);color:var(--coral)}
+  .mobnav.open{display:flex}
 
   /* hero */
   .hero{position:relative;height:min(80vh,620px);overflow:hidden;background:var(--soft)}
@@ -45,7 +61,7 @@
   .hero .veil{position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.72) 0%,rgba(255,255,255,.35) 42%,rgba(255,255,255,0) 70%)}
   .hero .inner{position:relative;max-width:var(--wrap);margin:0 auto;height:100%;display:flex;flex-direction:column;justify-content:center;padding:0 26px}
   .hero .kicker{font-size:.8rem;color:var(--ink);letter-spacing:.28em;text-transform:uppercase;font-weight:600}
-  .hero .big{font-family:var(--serif);color:var(--gold);font-size:clamp(3rem,8vw,6.4rem);line-height:.95;margin:14px 0 4px;font-weight:600}
+  .hero .big{font-family:var(--serif);color:var(--gold);font-size:clamp(3rem,8vw,6.4rem);line-height:.95;margin:14px 0 4px;font-weight:600;overflow-wrap:break-word}
   .hero .big span{display:block;font-size:.4em;letter-spacing:.06em;color:var(--ink)}
   .hero .sub{max-width:34ch;color:#3a3a3a;margin:14px 0 26px;font-size:1.05rem}
   .hero .divider{display:flex;align-items:center;gap:14px;color:var(--gold);margin-bottom:24px;max-width:320px}
@@ -54,6 +70,7 @@
   .btn-coral{background:var(--coral);color:#fff}.btn-coral:hover{background:#c94530}
   .btn-dark{background:var(--ink);color:#fff}.btn-dark:hover{background:#000}
   .btn-out{background:transparent;border:1px solid var(--ink);color:var(--ink)}.btn-out:hover{background:var(--ink);color:#fff}
+  .hero-btns{display:flex;gap:14px;flex-wrap:wrap}
   .dots{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);display:flex;gap:9px;z-index:3}
   .dots i{width:9px;height:9px;border-radius:999px;background:rgba(26,26,26,.28)}
   .dots i.on{background:var(--coral);width:26px;border-radius:99px}
@@ -127,15 +144,35 @@
   @media(max-width:980px){
     .usp .wrap{grid-template-columns:1fr 1fr}
     .cats,.pgrid{grid-template-columns:1fr 1fr}
+    .reviews-grid{grid-template-columns:1fr!important}
     .fg{grid-template-columns:1fr 1fr}
     nav.main{display:none}
-    .hd{grid-template-columns:auto 1fr auto}
+    .burger{display:inline-flex!important}
+    .hide-sm{display:none!important}
+    .icons{gap:16px}
+    .hd{grid-template-columns:1fr auto;padding:14px 18px}
+    .logo .name{font-size:1.3rem;letter-spacing:.14em}
+    .p .quick{transform:none}
   }
   @media(max-width:560px){
+    .topbar .social{display:none}
+    .topbar .wrap{justify-content:center;text-align:center}
+    .topbar span:first-child{font-size:.66rem;letter-spacing:.08em}
     .cats,.pgrid{grid-template-columns:1fr 1fr;gap:12px}
-    .usp .wrap{grid-template-columns:1fr}
-    .fg{grid-template-columns:1fr}
-    .hero{height:66vh}
+    .usp .wrap{grid-template-columns:1fr 1fr;gap:16px 10px}
+    .usp div{justify-content:flex-start}
+    .fg{grid-template-columns:1fr;gap:26px}
+    .hero{height:auto;min-height:72vh}
+    .hero .inner{padding:38px 22px}
+    .hero .veil{background:linear-gradient(180deg,rgba(255,255,255,.28),rgba(255,255,255,.5) 55%,rgba(255,255,255,.78))}
+    .hero .big{font-size:clamp(2.2rem,10vw,3.1rem);text-shadow:0 2px 16px rgba(255,255,255,.7)}
+    .hero .sub{font-size:.98rem;max-width:100%}
+    .hero-btns{flex-direction:column;width:100%}
+    .hero .btn{width:100%;justify-content:center;padding:15px 12px;font-size:.72rem;letter-spacing:.12em}
+    section{padding:54px 0}
+    .stitle{margin-bottom:30px}
+    .stitle h2{font-size:1.8rem}
+    .p .info h3{font-size:.72rem}
   }
   @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
@@ -164,10 +201,19 @@
     </nav>
     <div class="icons">
       <a href="#" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></a>
-      <a href="#" aria-label="Account"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></a>
+      <a href="#" class="hide-sm" aria-label="Account"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></a>
       <button class="cartc" id="cart" aria-label="Cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 8h12l-1 12H7z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg><b id="ct">0</b></button>
+      <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
     </div>
   </div>
+  <nav class="mobnav" id="mobnav">
+    <a href="#shop">Summer Sale</a>
+    <a href="#shop">New Arrivals</a>
+    <a href="#cats">Bedding</a>
+    <a href="#cats">Mattress Covers</a>
+    <a href="#cats">Sofa Covers</a>
+    <a href="#reviews">Reviews</a>
+  </nav>
 </header>
 
 <section class="hero" style="padding:0">
@@ -178,7 +224,7 @@
     <div class="big">FLAT 40% OFF<span>on premium bedding</span></div>
     <div class="divider">✦</div>
     <p class="sub">Hotel-grade bedsheets, waterproof covers &amp; plush quilt sets — made for real Pakistani homes.</p>
-    <div style="display:flex;gap:14px;flex-wrap:wrap">
+    <div class="hero-btns">
       <a href="#shop" class="btn btn-coral">Shop the Sale</a>
       <a href="#cats" class="btn btn-out">Explore Collections</a>
     </div>
@@ -236,7 +282,7 @@
 <section id="reviews">
   <div class="wrap">
     <div class="stitle"><div class="k">Customer Reviews</div><h2>Loved Across Pakistan</h2><div class="rule"></div></div>
-    <div class="pgrid" style="grid-template-columns:repeat(3,1fr)">
+    <div class="pgrid reviews-grid" style="grid-template-columns:repeat(3,1fr)">
       <div style="background:var(--soft);padding:28px;text-align:center"><div style="color:var(--coral);letter-spacing:2px">★★★★★</div><p style="font-family:var(--serif);color:#333;margin:14px 0">“The waterproof cover is a lifesaver with my toddler — soft, not plasticky. Fast delivery.”</p><b class="up" style="font-size:.72rem">Ayesha K. · Lahore</b></div>
       <div style="background:var(--soft);padding:28px;text-align:center"><div style="color:var(--coral);letter-spacing:2px">★★★★★</div><p style="font-family:var(--serif);color:#333;margin:14px 0">“Shaggy quilt set looks so premium in my room. Worth every rupee. Paid on delivery.”</p><b class="up" style="font-size:.72rem">Bilal R. · Karachi</b></div>
       <div style="background:var(--soft);padding:28px;text-align:center"><div style="color:var(--coral);letter-spacing:2px">★★★★★</div><p style="font-family:var(--serif);color:#333;margin:14px 0">“Proper king size and colours exactly like the photos. Will definitely order again.”</p><b class="up" style="font-size:.72rem">Sana M. · Islamabad</b></div>
@@ -274,5 +320,11 @@
   (function(){
     var ct=document.getElementById('ct'),toast=document.getElementById('toast'),n=0,t;
     document.querySelectorAll('.add').forEach(function(b){b.addEventListener('click',function(e){e.preventDefault();n++;ct.textContent=n;toast.textContent=(b.dataset.name||'Item')+' added to cart';toast.classList.add('show');clearTimeout(t);t=setTimeout(function(){toast.classList.remove('show')},1600);});});
+    var burger=document.getElementById('burger'),mob=document.getElementById('mobnav');
+    if(burger){burger.addEventListener('click',function(){var o=mob.classList.toggle('open');burger.setAttribute('aria-expanded',o);});
+      mob.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){mob.classList.remove('open');burger.setAttribute('aria-expanded','false');});});}
   })();
 </script>
+
+</body>
+</html>
